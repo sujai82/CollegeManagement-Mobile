@@ -215,7 +215,7 @@ For detailed architectural specifications, ER diagrams, security audits, and API
 **Stack:** Capacitor Android app wrapping the React (Vite) client, talking to an Express API on Render with a PostgreSQL database on Neon.
 
 **Live API:** https://college-api-ljqv.onrender.com/api/v1/health
-
+**Live web app:** https://collegemanagement-puce.vercel.app
 **Demo login:** `student.alex@college.edu` / `Password@123`
 
 **APK:** download `app-debug.apk` from the [v1.0 release]([https://github.com/sujai82/CollegeManagement/releases](https://github.com/sujai82/CollegeManagement-Mobile/releases/tag/v1.0)).
