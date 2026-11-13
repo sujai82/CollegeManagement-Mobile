@@ -218,7 +218,7 @@ For detailed architectural specifications, ER diagrams, security audits, and API
 **Live web app:** https://collegemanagement-puce.vercel.app
 **Demo login:** `student.alex@college.edu` / `Password@123`
 
-**APK:** download `app-debug.apk` from the [v1.0 release]([https://github.com/sujai82/CollegeManagement/releases](https://github.com/sujai82/CollegeManagement-Mobile/releases/tag/v1.0)).
+**APK:** download `app-debug.apk` from the [v1.0 release](https://github.com/sujai82/CollegeManagement-Mobile/releases/tag/v1.0).
 
 ### What I built (mobile)
 - Capacitor Android app, packaged as an APK.
