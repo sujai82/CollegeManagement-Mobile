@@ -8,7 +8,7 @@ export const AuthLayout = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f8f9ff]">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--page-background)]">
         <LoadingSpinner size="lg" text="Verifying institutional security tokens..." />
       </div>
     );
@@ -19,26 +19,26 @@ export const AuthLayout = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#f8f9ff] text-[#0b1c30]">
-      {/* Top Institutional Bar with safe-area padding for status bar/notch */}
-      <header className="bg-white border-b border-[#e2e8f0] pt-[env(safe-area-inset-top,0px)]">
+    <div className="min-h-screen flex flex-col justify-between bg-[var(--page-background)] text-[var(--main-text)]">
+      {/* Top Institutional Bar with primary purple and white text */}
+      <header className="bg-[var(--primary)] text-white border-b border-purple-400/30 pt-[env(safe-area-inset-top,0px)] shadow-xs">
         <div className="h-14 px-4 sm:px-6 lg:px-12 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded bg-[#0f172a] text-white flex items-center justify-center font-bold text-sm tracking-widest shadow-sm">
+            <div className="w-8 h-8 rounded bg-white text-[var(--primary)] flex items-center justify-center font-bold text-sm tracking-widest shadow-xs">
               <span className="material-symbols-outlined text-[18px]">account_balance</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#0b1c30]">Veritas University</span>
-              <span className="text-[11px] text-[#515f74] font-medium">Academic Affairs & Registrar Network</span>
+              <span className="text-xs font-bold text-white">Veritas University</span>
+              <span className="text-[11px] text-purple-100 font-medium">Academic Affairs & Registrar Network</span>
             </div>
           </div>
 
           <div className="hidden sm:flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#f1f5f9] text-[#475569] font-mono text-[11px]">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block animate-pulse"></span>
-              SYS-ACTIVE: AY 2025–2026
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/15 text-white font-mono text-[11px] border border-white/20">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+              Sys active: AY 2025–2026
             </span>
-            <span className="text-xs text-[#94a3b8] font-mono">NODE: REG-01</span>
+            <span className="text-xs text-purple-200 font-mono">Node: Reg-01</span>
           </div>
         </div>
       </header>
@@ -51,13 +51,13 @@ export const AuthLayout = () => {
       </main>
 
       {/* Institutional Security Footer with safe-area padding */}
-      <footer className="border-t border-[#e2e8f0] bg-white pb-[env(safe-area-inset-bottom,0px)]">
-        <div className="py-4 px-6 text-center text-xs text-[#515f74] flex flex-col sm:flex-row items-center justify-between gap-2 max-w-7xl mx-auto w-full">
+      <footer className="border-t border-[var(--border)] bg-[var(--card)] pb-[env(safe-area-inset-bottom,0px)] text-[var(--secondary-text)]">
+        <div className="py-4 px-6 text-center text-xs flex flex-col sm:flex-row items-center justify-between gap-2 max-w-7xl mx-auto w-full">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-[16px] text-emerald-600">verified_user</span>
             <span>SAML 2.0 / Dual-Token Cryptographic Authentication &bull; FERPA Compliant</span>
           </div>
-          <div className="font-mono text-[11px] text-[#94a3b8]">
+          <div className="font-mono text-[11px] text-[var(--secondary-text)]">
             Veritas CMS &copy; {new Date().getFullYear()} &bull; v4.18-REGISTRAR
           </div>
         </div>

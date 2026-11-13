@@ -140,35 +140,12 @@ export const FacultyListPage = () => {
 
   return (
     <div className="space-y-5">
-      {/* 1. Contextual Academic Governance Bar (Stitch Spec) */}
-      <div className="flex flex-wrap items-center justify-between gap-2 bg-white px-4 py-2 rounded border border-[#e2e8f0]">
-        <div className="flex items-center gap-1.5 text-xs text-[#515f74]">
-          <span className="material-symbols-outlined text-[17px] text-[#515f74]">account_tree</span>
-          <span className="font-bold uppercase tracking-wider text-[11px] text-[#0b1c30]">Divisional Registry</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="font-semibold uppercase tracking-wider text-[11px]">Computing & Natural Sciences</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="badge-mono text-[10px] font-bold">AY 2025–2026</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="badge-mono text-[10px]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block mr-1"></span>
-            AUDIT: LIVE SYNC
-          </span>
-          <span className="badge-mono text-[10px]">SECT-CAP-REV.4</span>
-        </div>
-      </div>
-
-      {/* 2. Page Header & Action Horizon */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-5 rounded border border-[#e2e8f0]">
+      {/* Page Header */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-[var(--card)] p-5 rounded-2xl border border-[var(--border)] shadow-xs">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-bold text-[#515f74] uppercase tracking-wider">Academic Portfolio & Operations</span>
-            <span className="badge-mono text-[10px]">CAPACITY: 1,480 CR MAX</span>
-          </div>
-          <h1 className="text-xl font-bold text-[#0b1c30] tracking-tight">Faculty Workload & Governance</h1>
-          <p className="text-xs text-[#515f74] mt-0.5">
-            Faculty appointments, individual access keys, credit capacity allocations, and departmental instructional load.
+          <h1 className="text-xl font-bold text-[var(--main-text)] tracking-tight">Faculty</h1>
+          <p className="text-xs text-[var(--secondary-text)] mt-0.5">
+            {filteredFaculty.length} faculty members
           </p>
         </div>
 
@@ -181,13 +158,13 @@ export const FacultyListPage = () => {
               const url = URL.createObjectURL(blob);
               const a = document.createElement('a');
               a.href = url;
-              a.download = 'faculty_workload_registry.csv';
+              a.download = 'faculty_registry.csv';
               a.click();
             }}
-            className="btn-stitch-secondary"
+            className="btn-stitch-secondary py-2 px-3 text-xs font-semibold"
           >
             <span className="material-symbols-outlined text-[16px]">file_download</span>
-            <span>Workload Report</span>
+            <span>Export CSV</span>
           </button>
 
           {canManage && (

@@ -402,31 +402,18 @@ export const AttendancePage = () => {
 
   return (
     <div className="space-y-5">
-      {/* 1. Contextual Breadcrumb & Session Banner (Stitch Spec) */}
-      <div className="card-stitch p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white">
+      {/* 1. Session Header */}
+      <div className="card-stitch p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs">
         <div className="space-y-1.5 flex-1">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="badge-rose">
-              <span className="w-2 h-2 rounded-full bg-[#ba1a1a] animate-pulse"></span>
-              LIVE SIS SESSION ACTIVE
-            </span>
-            <span className="text-[#94a3b8] text-xs">•</span>
-            <span className="badge-mono text-[10px]">SECTION {selectedAssignment.section || 'A'}</span>
-            <span className="text-[#94a3b8] text-xs">•</span>
-            <span className="text-xs text-[#515f74] font-medium">
-              {selectedAssignment.department_name || 'Engineering Faculty'}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 pt-1 flex-wrap">
-            <h1 className="text-xl font-bold text-[#0b1c30] tracking-tight">
-              {selectedAssignment.course_code || 'CS301'}: {selectedAssignment.course_title || 'Curriculum Course'}
+          <div className="flex items-center gap-3 flex-wrap">
+            <h1 className="text-xl font-bold text-[var(--main-text)] tracking-tight">
+              Attendance
             </h1>
             {assignments.length > 1 && (
               <select
                 value={selectedAssignmentId}
                 onChange={(e) => setSelectedAssignmentId(e.target.value)}
-                className="px-2.5 py-1 bg-[#f8f9ff] border border-[#cbd5e1] rounded text-xs font-semibold text-[#0b1c30] focus:outline-none"
+                className="px-2.5 py-1 bg-[#F5F3FF] border border-[var(--border)] rounded-xl text-xs font-semibold text-[var(--main-text)] focus:outline-none"
               >
                 {assignments.map((a) => (
                   <option key={a.id} value={a.id}>
@@ -437,36 +424,40 @@ export const AttendancePage = () => {
             )}
           </div>
 
-          <div className="flex items-center gap-3 text-xs text-[#515f74] flex-wrap pt-0.5">
+          <div className="flex items-center gap-3 text-xs text-[var(--secondary-text)] flex-wrap pt-0.5">
+            <span className="font-medium text-[var(--main-text)]">
+              {selectedAssignment.course_code || 'CS301'}: {selectedAssignment.course_title || 'Course'} (Sec {selectedAssignment.section || 'A'})
+            </span>
+            <span className="text-[var(--border)]">•</span>
             <span className="inline-flex items-center gap-1">
-              <span className="material-symbols-outlined text-[15px] text-[#515f74]">calendar_today</span>
+              <span className="material-symbols-outlined text-[15px] text-[var(--secondary-text)]">calendar_today</span>
               <input
                 type="date"
                 value={sessionDate}
                 onChange={(e) => setSessionDate(e.target.value)}
-                className="border-b border-[#cbd5e1] bg-transparent text-xs text-[#0b1c30] font-medium focus:outline-none"
+                className="border-b border-[var(--border)] bg-transparent text-xs text-[var(--main-text)] font-medium focus:outline-none"
               />
             </span>
-            <span className="text-[#c6c6cd]">•</span>
-            <span className="inline-flex items-center gap-1 font-semibold text-[#0b1c30]">
-              <span className="material-symbols-outlined text-[15px] text-[#0f172a]">schedule</span>
-              Period #{periodNumber}
+            <span className="text-[var(--border)]">•</span>
+            <span className="inline-flex items-center gap-1 font-semibold text-[var(--main-text)]">
+              <span className="material-symbols-outlined text-[15px]">schedule</span>
+              Period {periodNumber}
             </span>
-            <span className="text-[#c6c6cd]">•</span>
-            <span className="inline-flex items-center gap-1 font-semibold text-[#0b1c30]">
-              <span className="material-symbols-outlined text-[15px] text-[#0f172a]">badge</span>
-              {selectedAssignment.faculty_name || 'Assigned Faculty'}
+            <span className="text-[var(--border)]">•</span>
+            <span className="inline-flex items-center gap-1 font-semibold text-[var(--main-text)]">
+              <span className="material-symbols-outlined text-[15px]">badge</span>
+              {selectedAssignment.faculty_name || 'Faculty'}
             </span>
           </div>
         </div>
 
         {/* Active Timer & Session Controls */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-2 bg-[#eff4ff] border border-[#e2e8f0] rounded">
-            <span className="material-symbols-outlined text-[#515f74] text-[18px]">timer</span>
+          <div className="flex items-center gap-2 px-3 py-2 bg-[#F5F3FF] border border-[var(--border)] rounded-xl">
+            <span className="material-symbols-outlined text-[var(--secondary-text)] text-[18px]">timer</span>
             <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-[#515f74] uppercase tracking-wider">Session Time</span>
-              <span className="font-mono text-xs font-bold text-[#0b1c30]">{formatTimer(secondsElapsed)}</span>
+              <span className="text-[10px] font-semibold text-[var(--secondary-text)]">Session time</span>
+              <span className="font-mono text-xs font-bold text-[var(--main-text)]">{formatTimer(secondsElapsed)}</span>
             </div>
           </div>
 
@@ -474,14 +465,14 @@ export const AttendancePage = () => {
             <button
               type="button"
               onClick={generatePin}
-              className={`p-2 rounded border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              className={`p-2 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 sessionPin
-                  ? 'bg-sky-50 border-sky-400 text-sky-800 shadow-xs'
-                  : 'bg-white border-[#cbd5e1] text-[#0b1c30] hover:bg-[#eff4ff]'
+                  ? 'bg-purple-50 border-purple-400 text-[var(--primary)] shadow-xs'
+                  : 'bg-[var(--card)] border-[var(--border)] text-[var(--main-text)] hover:bg-[#F5F3FF]'
               }`}
               title="Generate live 6-digit check-in code for students"
             >
-              <span className="material-symbols-outlined text-[16px] text-sky-600">
+              <span className="material-symbols-outlined text-[16px] text-[var(--primary)]">
                 {sessionPin ? 'pin' : 'qr_code_scanner'}
               </span>
               <span>{sessionPin ? 'Regenerate PIN' : 'Session PIN'}</span>
@@ -490,22 +481,20 @@ export const AttendancePage = () => {
             <button
               type="button"
               onClick={() => openForecasterModal()}
-              className="p-2 rounded border border-[#cbd5e1] bg-white text-xs font-bold text-indigo-700 hover:bg-indigo-50 flex items-center gap-1.5 cursor-pointer shadow-2xs"
-              title="Calculate projected attendance based on future classes"
+              className="p-2 rounded-xl border border-[var(--border)] bg-[var(--card)] text-xs font-bold text-[var(--primary)] hover:bg-[#EDE9FE] flex items-center gap-1.5 cursor-pointer shadow-2xs"
             >
-              <span className="material-symbols-outlined text-[16px] text-indigo-600">calculate</span>
-              <span>What-If Simulator</span>
+              <span className="material-symbols-outlined text-[16px]">calculate</span>
+              <span>Simulator</span>
             </button>
 
             <button
               type="button"
               onClick={() => setIsLocked(!isLocked)}
-              className={`p-2 rounded border text-xs font-bold transition-all flex items-center gap-1 ${
+              className={`p-2 rounded-xl border text-xs font-bold transition-all flex items-center gap-1 ${
                 isLocked
                   ? 'bg-amber-50 border-amber-300 text-amber-800'
-                  : 'bg-white border-[#cbd5e1] text-[#515f74] hover:bg-[#f8f9ff]'
+                  : 'bg-[var(--card)] border-[var(--border)] text-[var(--secondary-text)] hover:bg-[#F5F3FF]'
               }`}
-              title={isLocked ? 'Unlock roster modifications' : 'Lock session roster'}
             >
               <span className="material-symbols-outlined text-[16px]">
                 {isLocked ? 'lock' : 'lock_open'}
@@ -516,7 +505,7 @@ export const AttendancePage = () => {
             <button
               type="button"
               onClick={() => setShowHistory(!showHistory)}
-              className="p-2 rounded border border-[#cbd5e1] bg-white text-xs font-bold text-[#0b1c30] hover:bg-[#f8f9ff] flex items-center gap-1"
+              className="p-2 rounded-xl border border-[var(--border)] bg-[var(--card)] text-xs font-bold text-[var(--main-text)] hover:bg-[#F5F3FF] flex items-center gap-1"
             >
               <span className="material-symbols-outlined text-[16px]">history</span>
               <span>History ({pastSessions.length})</span>
@@ -527,13 +516,12 @@ export const AttendancePage = () => {
                 type="button"
                 disabled={saving || isLocked}
                 onClick={handleSaveSession}
-                className="btn-stitch-primary py-2 px-4 shadow-sm flex items-center gap-1.5"
-                title={isExistingSession ? "Submit updates to this recorded session in Neon PostgreSQL" : "Submit attendance for this session in Neon PostgreSQL"}
+                className="btn-stitch-primary py-2 px-4 shadow-sm flex items-center gap-1.5 rounded-xl text-xs font-semibold"
               >
                 <span className="material-symbols-outlined text-[16px]">
-                  {saving ? 'sync' : isExistingSession ? 'published_with_changes' : 'how_to_reg'}
+                  {saving ? 'sync' : 'save'}
                 </span>
-                <span>{saving ? 'Saving...' : isExistingSession ? 'Submit Update for Current Session' : 'Submit Roll Call'}</span>
+                <span>{saving ? 'Saving...' : 'Save'}</span>
               </button>
             )}
           </div>
@@ -641,19 +629,19 @@ export const AttendancePage = () => {
           </div>
           <div className="flex items-center gap-4 text-xs">
             <div className="text-center">
-              <span className="text-[10px] text-[#515f74] uppercase block">Total Sessions</span>
-              <strong className="text-base text-[#0b1c30]">{studentStats.total_sessions}</strong>
+              <span className="text-[10px] text-[var(--secondary-text)] block">Total sessions</span>
+              <strong className="text-base text-[var(--main-text)]">{studentStats.total_sessions}</strong>
             </div>
             <div className="text-center">
-              <span className="text-[10px] text-[#515f74] uppercase block">Present</span>
+              <span className="text-[10px] text-emerald-700 block">Present</span>
               <strong className="text-base text-emerald-700">{studentStats.present_count}</strong>
             </div>
             <div className="text-center">
-              <span className="text-[10px] text-[#515f74] uppercase block">Absent</span>
+              <span className="text-[10px] text-rose-700 block">Absent</span>
               <strong className="text-base text-rose-700">{studentStats.absent_count}</strong>
             </div>
             <div className="text-center">
-              <span className="text-[10px] text-[#515f74] uppercase block">Compliance</span>
+              <span className="text-[10px] text-[var(--secondary-text)] block">Compliance</span>
               <span className="badge-emerald text-xs font-bold">{studentStats.attendance_percentage}%</span>
             </div>
           </div>
@@ -695,30 +683,30 @@ export const AttendancePage = () => {
         <div className="flex-1 w-full flex items-center gap-2">
           <span className="material-symbols-outlined text-[#76777d] text-[18px]">edit_note</span>
           <div className="flex-1">
-            <label className="block text-[10px] font-bold text-[#515f74] uppercase tracking-wider mb-0.5">
-              Lecture Topic & Syllabus Objective
+            <label className="block text-xs font-semibold text-[var(--secondary-text)] mb-0.5">
+              Topic
             </label>
             <input
               type="text"
               value={topic}
               disabled={isLocked}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="e.g. Relational Normalization & BCNF Integrity"
-              className="w-full px-2.5 py-1 text-xs border border-[#cbd5e1] rounded font-semibold text-[#0b1c30] focus:border-[#0f172a] focus:outline-none"
+              placeholder="e.g. Relational Normalization"
+              className="w-full px-2.5 py-1 text-xs border border-[var(--border)] rounded-xl font-medium text-[var(--main-text)] focus:outline-none"
             />
           </div>
         </div>
 
         <div className="flex items-center gap-2.5 flex-wrap w-full md:w-auto">
           <div>
-            <label className="block text-[10px] font-bold text-[#515f74] uppercase tracking-wider mb-0.5">
+            <label className="block text-xs font-semibold text-[var(--secondary-text)] mb-0.5">
               Period
             </label>
             <select
               value={periodNumber}
               disabled={isLocked}
               onChange={(e) => setPeriodNumber(e.target.value)}
-              className="px-2.5 py-1 text-xs border border-[#cbd5e1] rounded font-bold text-[#0b1c30]"
+              className="px-2.5 py-1 text-xs border border-[var(--border)] rounded-xl font-bold text-[var(--main-text)]"
             >
               {[1, 2, 3, 4, 5, 6, 7, 8].map((p) => (
                 <option key={p} value={p}>
@@ -733,7 +721,7 @@ export const AttendancePage = () => {
               type="button"
               disabled={isLocked}
               onClick={markAllPresent}
-              className="px-3 py-1 bg-[#eff4ff] border border-[#cbd5e1] rounded text-xs font-bold text-[#0b1c30] hover:bg-[#e2e8f0] transition-all flex items-center gap-1 cursor-pointer"
+              className="px-3 py-1 bg-[#F5F3FF] border border-[var(--border)] rounded-xl text-xs font-bold text-[var(--main-text)] hover:bg-[#EDE9FE] transition-all flex items-center gap-1 cursor-pointer"
             >
               <span className="material-symbols-outlined text-[16px] text-emerald-700">done_all</span>
               <span>Mark All Present</span>
@@ -746,14 +734,13 @@ export const AttendancePage = () => {
                 type="button"
                 disabled={saving || isLocked}
                 onClick={handleSaveSession}
-                className="px-3.5 py-1 bg-[#0f172a] hover:bg-[#1e293b] text-white rounded text-xs font-bold transition-all flex items-center gap-1.5 shadow-xs cursor-pointer disabled:opacity-50"
-                title={isExistingSession ? "Submit updates to this recorded session in Neon PostgreSQL" : "Submit attendance for this session in Neon PostgreSQL"}
+                className="btn-stitch-primary py-1.5 px-3.5 text-xs font-semibold rounded-xl transition-all flex items-center gap-1.5 shadow-xs cursor-pointer disabled:opacity-50"
               >
                 <span className="material-symbols-outlined text-[15px]">
-                  {saving ? 'sync' : isExistingSession ? 'published_with_changes' : 'save'}
+                  {saving ? 'sync' : 'save'}
                 </span>
                 <span>
-                  {saving ? 'Saving...' : isExistingSession ? 'Submit Update for Current Session' : 'Submit Attendance'}
+                  {saving ? 'Saving...' : 'Save'}
                 </span>
               </button>
             </div>
@@ -763,30 +750,25 @@ export const AttendancePage = () => {
 
       {/* 3. Metric KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
-        <div className="card-stitch p-3 bg-white">
-          <span className="text-[10px] font-bold text-[#515f74] uppercase block">Enrolled Students</span>
-          <span className="text-xl font-bold text-[#0b1c30] mt-1 block">{roster.length}</span>
-          <span className="text-[10px] text-[#515f74]">Active Course Roster</span>
+        <div className="card-stitch p-3 bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs">
+          <span className="text-[10px] font-semibold text-[var(--secondary-text)] block">Enrolled students</span>
+          <span className="text-xl font-bold text-[var(--main-text)] mt-1 block">{roster.length}</span>
         </div>
-        <div className="card-stitch p-3 bg-white">
-          <span className="text-[10px] font-bold text-emerald-700 uppercase block">Present</span>
+        <div className="card-stitch p-3 bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs">
+          <span className="text-[10px] font-semibold text-emerald-700 block">Present</span>
           <span className="text-xl font-bold text-emerald-700 mt-1 block">{presentCount}</span>
-          <span className="text-[10px] text-[#515f74]">Verified In-Seat</span>
         </div>
-        <div className="card-stitch p-3 bg-white">
-          <span className="text-[10px] font-bold text-amber-700 uppercase block">Late Entry</span>
+        <div className="card-stitch p-3 bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs">
+          <span className="text-[10px] font-semibold text-amber-700 block">Late entry</span>
           <span className="text-xl font-bold text-amber-700 mt-1 block">{lateCount}</span>
-          <span className="text-[10px] text-[#515f74]">Tardy Arrival</span>
         </div>
-        <div className="card-stitch p-3 bg-white">
-          <span className="text-[10px] font-bold text-sky-700 uppercase block">On Duty</span>
-          <span className="text-xl font-bold text-sky-700 mt-1 block">{onDutyCount}</span>
-          <span className="text-[10px] text-[#515f74]">Approved Collegiate Duty</span>
+        <div className="card-stitch p-3 bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs">
+          <span className="text-[10px] font-semibold text-[var(--primary)] block">On duty</span>
+          <span className="text-xl font-bold text-[var(--primary)] mt-1 block">{onDutyCount}</span>
         </div>
-        <div className="card-stitch p-3 bg-white">
-          <span className="text-[10px] font-bold text-rose-700 uppercase block">Compliance Rate</span>
-          <span className="text-xl font-bold text-[#0b1c30] mt-1 block">{attendanceRate}%</span>
-          <span className="text-[10px] text-[#515f74]">{absentCount} Absent</span>
+        <div className="card-stitch p-3 bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs">
+          <span className="text-[10px] font-semibold text-rose-700 block">Compliance rate</span>
+          <span className="text-xl font-bold text-[var(--main-text)] mt-1 block">{attendanceRate}%</span>
         </div>
       </div>
 

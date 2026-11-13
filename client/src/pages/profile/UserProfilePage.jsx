@@ -43,11 +43,11 @@ export const UserProfilePage = () => {
   const getRoleBadge = (role) => {
     switch (role) {
       case 'ADMIN':
-        return <span className="badge-amber">REGISTRAR / ADMIN</span>;
+        return <span className="badge-purple">Admin</span>;
       case 'FACULTY':
-        return <span className="badge-emerald">FACULTY CADRE</span>;
+        return <span className="badge-emerald">Faculty</span>;
       case 'STUDENT':
-        return <span className="badge-sky">UNDERGRADUATE SCHOLAR</span>;
+        return <span className="badge-purple">Student</span>;
       default:
         return <span className="badge-mono">{role}</span>;
     }
@@ -55,33 +55,11 @@ export const UserProfilePage = () => {
 
   return (
     <div className="max-w-3xl space-y-5">
-      {/* 1. Academic Governance Context Strip */}
-      <div className="flex flex-wrap items-center justify-between gap-2 bg-white px-4 py-2 rounded border border-[#e2e8f0]">
-        <div className="flex items-center gap-1.5 text-xs text-[#515f74]">
-          <span className="material-symbols-outlined text-[17px] text-[#515f74]">security</span>
-          <span className="font-bold uppercase tracking-wider text-[11px] text-[#0b1c30]">Security Governance</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="font-semibold uppercase tracking-wider text-[11px]">Identity & FERPA Compliance</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="badge-mono text-[10px] font-bold">256-BIT TOKEN</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="badge-mono text-[10px]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block mr-1"></span>
-            ACTIVE SESSION
-          </span>
-        </div>
-      </div>
-
-      {/* 2. Page Header */}
-      <div className="card-stitch p-5 bg-white border border-[#e2e8f0]">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-[11px] font-bold text-[#515f74] uppercase tracking-wider">Identity Management</span>
-          <span className="badge-mono text-[10px]">NEON-DB AUTH</span>
-        </div>
-        <h1 className="text-xl font-bold text-[#0b1c30] tracking-tight">Institutional Profile & Credentials</h1>
-        <p className="text-xs text-[#515f74] mt-0.5">
-          View your institutional identity credentials, active role permissions, and rotate security access keys.
+      {/* Page Header */}
+      <div className="card-stitch p-5 bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs">
+        <h1 className="text-xl font-bold text-[var(--main-text)] tracking-tight">Profile</h1>
+        <p className="text-xs text-[var(--secondary-text)] mt-0.5">
+          Account details and security settings
         </p>
       </div>
 

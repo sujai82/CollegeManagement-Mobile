@@ -78,35 +78,12 @@ export const DepartmentListPage = () => {
 
   return (
     <div className="space-y-5">
-      {/* 1. Contextual Academic Governance Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 bg-white px-4 py-2 rounded border border-[#e2e8f0]">
-        <div className="flex items-center gap-1.5 text-xs text-[#515f74]">
-          <span className="material-symbols-outlined text-[17px] text-[#515f74]">domain</span>
-          <span className="font-bold uppercase tracking-wider text-[11px] text-[#0b1c30]">Academic Divisions</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="font-semibold uppercase tracking-wider text-[11px]">Faculty Infrastructure</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="badge-mono text-[10px] font-bold">AY 2025–2026</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="badge-mono text-[10px]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block mr-1"></span>
-            DIVISIONS: ACCREDITED
-          </span>
-          <span className="badge-mono text-[10px]">FAC-CAP: 100%</span>
-        </div>
-      </div>
-
-      {/* 2. Header & Action Horizon */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-5 rounded border border-[#e2e8f0]">
+      {/* Header & Action */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-[var(--card)] p-5 rounded-2xl border border-[var(--border)] shadow-xs">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-bold text-[#515f74] uppercase tracking-wider">Institutional Architecture</span>
-            <span className="badge-mono text-[10px]">{filteredDepts.length} ACTIVE DIVISIONS</span>
-          </div>
-          <h1 className="text-xl font-bold text-[#0b1c30] tracking-tight">Academic Departments & Infrastructure</h1>
-          <p className="text-xs text-[#515f74] mt-0.5">
-            Collegiate faculties, instructional blocks, departmental HODs, and student allocation rosters.
+          <h1 className="text-xl font-bold text-[var(--main-text)] tracking-tight">Departments</h1>
+          <p className="text-xs text-[var(--secondary-text)] mt-0.5">
+            {filteredDepts.length} departments
           </p>
         </div>
 
@@ -114,7 +91,7 @@ export const DepartmentListPage = () => {
           <button
             type="button"
             onClick={() => setShowModal(true)}
-            className="btn-stitch-primary"
+            className="btn-stitch-primary py-2 px-3 text-xs font-semibold"
           >
             <span className="material-symbols-outlined text-[16px]">add_circle</span>
             <span>Add Department</span>

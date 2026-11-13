@@ -50,28 +50,18 @@ export const StudentCheckInWidget = ({ onCheckInSuccess, compact = false }) => {
   };
 
   return (
-    <div className={`card-stitch bg-white border border-[#cbd5e1] overflow-hidden ${compact ? 'p-4' : 'p-5'}`}>
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#e2e8f0] pb-3 mb-4">
+    <div className={`card-stitch bg-[var(--card)] border border-[var(--border)] rounded-2xl overflow-hidden shadow-xs ${compact ? 'p-4' : 'p-5'}`}>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-3 mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#0f172a] text-white flex items-center justify-center shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-[var(--primary)] text-white flex items-center justify-center shadow-xs">
             <span className="material-symbols-outlined text-[22px]">pin</span>
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-sm font-bold text-[#0b1c30]">Live Lecture Check-In</h2>
-              <span className="badge-rose text-[10px] font-bold">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#ba1a1a] animate-pulse"></span>
-                LIVE CODE
-              </span>
-            </div>
-            <p className="text-xs text-[#515f74]">
-              Enter the 6-digit Session PIN displayed on the lecture hall screen to log attendance.
+            <h2 className="text-sm font-bold text-[var(--main-text)]">Check in</h2>
+            <p className="text-xs text-[var(--secondary-text)] mt-0.5">
+              Enter the 6-digit PIN
             </p>
           </div>
-        </div>
-        <div className="hidden sm:flex items-center gap-1.5 text-xs text-[#515f74]">
-          <span className="material-symbols-outlined text-[16px] text-emerald-600">verified</span>
-          <span className="font-semibold text-[11px]">Instant SIS Sync</span>
         </div>
       </div>
 
@@ -79,7 +69,7 @@ export const StudentCheckInWidget = ({ onCheckInSuccess, compact = false }) => {
       <form onSubmit={handleCheckIn} className="space-y-4">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <div className="relative flex-1">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#515f74] text-[20px]">
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[var(--secondary-text)] text-[20px]">
               key
             </span>
             <input
@@ -89,19 +79,19 @@ export const StudentCheckInWidget = ({ onCheckInSuccess, compact = false }) => {
               placeholder="000-000"
               maxLength={7}
               disabled={loading}
-              className="w-full pl-10 pr-4 py-2.5 bg-[#f8f9ff] border-2 border-[#cbd5e1] focus:border-[#0f172a] rounded-lg text-lg font-mono font-bold tracking-widest text-[#0b1c30] placeholder-[#94a3b8] focus:outline-none transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 bg-[#F5F3FF] border-2 border-[var(--border)] focus:border-[var(--primary)] rounded-xl text-lg font-mono font-bold tracking-widest text-[var(--main-text)] placeholder-[var(--secondary-text)]/50 focus:outline-none transition-colors"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading || pin.replace(/-/g, '').length < 6}
-            className="btn-stitch-primary py-2.5 px-6 text-xs font-bold flex items-center justify-center gap-2 shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-xs"
+            className="btn-stitch-primary py-2.5 px-6 text-xs font-bold flex items-center justify-center gap-2 shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-xs rounded-xl"
           >
             <span className="material-symbols-outlined text-[18px]">
               {loading ? 'sync' : 'check_circle'}
             </span>
-            <span>{loading ? 'Verifying PIN...' : 'Submit Session PIN'}</span>
+            <span>{loading ? 'Checking in...' : 'Check in'}</span>
           </button>
         </div>
 

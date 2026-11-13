@@ -4,10 +4,32 @@ import StatCard from '../../components/common/StatCard';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { Link } from 'react-router-dom';
 import StudentCheckInWidget from '../../components/attendance/StudentCheckInWidget';
+import useCountUp from '../../hooks/useCountUp';
+import { useAuth } from '../../context/AuthContext';
 
 export const StudentDashboard = () => {
+  const { user } = useAuth();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const rawAttendance = data?.overallAttendance ?? 89.5;
+  const animatedAttendance = useCountUp(rawAttendance, 450, !loading);
+
+  const getFirstName = () => {
+    if (user?.firstName) return user.firstName;
+    if (data?.firstName) return data.firstName;
+    if (user?.name) return user.name.split(' ')[0];
+    if (user?.email) {
+      const handle = user.email.split('@')[0];
+      const namePart = handle.replace(/^(student|faculty|admin)\./i, '').split(/[._-]/)[0];
+      if (namePart) return namePart.charAt(0).toUpperCase() + namePart.slice(1);
+    }
+    return 'Alex';
+  };
+
+  const firstName = getFirstName();
+  const deptCode = data?.departmentCode || (data?.admissionNumber ? data.admissionNumber.split('-')[2] : 'CSE') || 'CSE';
+  const semNumber = String(data?.currentSemester || '3').replace(/[^0-9]/g, '') || '3';
 
   const fetchStudentData = useCallback(async () => {
     try {
@@ -55,45 +77,24 @@ export const StudentDashboard = () => {
 
   return (
     <div className="space-y-5">
-      {/* 1. Academic Governance Context Strip */}
-      <div className="flex flex-wrap items-center justify-between gap-2 bg-white px-4 py-2 rounded border border-[#e2e8f0]">
-        <div className="flex items-center gap-1.5 text-xs text-[#515f74]">
-          <span className="material-symbols-outlined text-[17px] text-[#515f74]">school</span>
-          <span className="font-bold uppercase tracking-wider text-[11px] text-[#0b1c30]">Student SIS</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="font-semibold uppercase tracking-wider text-[11px]">Enrolled Scholar Roster</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="badge-mono text-[10px] font-bold">AY 2025–2026</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="badge-mono text-[10px]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block mr-1"></span>
-            BURSAR: CLEARED
-          </span>
-          <span className="badge-mono text-[10px]">AUDIT: PASS</span>
-        </div>
-      </div>
-
-      {/* 2. Student Profile Banner */}
-      <div className="card-stitch p-5 bg-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+      {/* Hero Card */}
+      <div className="card-stitch p-5 bg-[var(--card)] border border-[var(--border)] rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-            <span className="badge-mono text-xs font-bold text-[#0b1c30]">
+            <span className="badge-mono text-xs font-bold">
               {data?.admissionNumber || 'CMP-2025-CSE-0001'}
             </span>
-            <span className="badge-emerald">GOOD STANDING</span>
-            <span className="badge-sky">DEAN'S HONOR LIST</span>
           </div>
-          <h1 className="text-xl font-bold text-[#0b1c30] tracking-tight">Academic Overview & Transcript Hub</h1>
-          <p className="text-xs text-[#515f74] mt-0.5">
-            {data?.department} • {data?.currentSemester} • Fall Academic Term
+          <h1 className="text-xl font-bold text-[var(--main-text)] tracking-tight">Hi, {firstName}</h1>
+          <p className="text-xs text-[var(--secondary-text)] mt-0.5">
+            {deptCode} · Semester {semNumber}
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <Link to="/attendance" className="btn-stitch-primary">
             <span className="material-symbols-outlined text-[16px]">fact_check</span>
-            <span>Live Attendance Log</span>
+            <span>Attendance</span>
           </Link>
         </div>
       </div>
@@ -103,7 +104,7 @@ export const StudentDashboard = () => {
 
       {/* Attendance Deficiency Alert if < 75% */}
       {isLowAttendance && (
-        <div className="p-3 bg-[#fff1f2] border border-[#fecdd3] rounded text-xs text-[#9f1239] flex items-start gap-2.5">
+        <div className="p-3 bg-[#fff1f2] border border-[#fecdd3] rounded-2xl text-xs text-[#9f1239] flex items-start gap-2.5">
           <span className="material-symbols-outlined text-[20px] shrink-0 text-[#ba1a1a]">warning</span>
           <div>
             <span className="font-bold block">Attendance Deficiency Notice (&lt; 75%)</span>
@@ -114,57 +115,50 @@ export const StudentDashboard = () => {
         </div>
       )}
 
-      {/* 3. KPI Metrics Grid */}
+      {/* Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <StatCard
-          title="Overall Lecture Attendance"
-          value={`${data?.overallAttendance || 89.5}%`}
+          index={0}
+          title="Attendance"
+          value={`${animatedAttendance}%`}
           icon="verified"
-          subtext="Includes approved On-Duty"
-          trend="Req: ≥ 75%"
+          trend="Min 75%"
           progress={data?.overallAttendance || 89.5}
           progressColor={isLowAttendance ? 'bg-[#ba1a1a]' : 'bg-emerald-600'}
-          badge={isLowAttendance ? 'At Risk' : 'Compliant'}
-          badgeType={isLowAttendance ? 'rose' : 'emerald'}
         />
         <StatCard
-          title="Enrolled Courses"
+          index={1}
+          title="Courses"
           value={data?.enrolledCoursesCount || 4}
           icon="menu_book"
-          subtext="Current Academic Semester"
-          trend="15 Total Credits"
+          trend="15 credits"
           progress={100}
-          progressColor="bg-[#0f172a]"
-          badge="Full-Time"
-          badgeType="sky"
+          progressColor="bg-[var(--primary)]"
         />
         <StatCard
-          title="Academic Standing"
-          value="3.85 GPA"
+          index={2}
+          title="GPA"
+          value="3.85"
           icon="military_tech"
-          subtext="Dean's List Eligible"
-          trend="Top 5% Cohort"
           progress={96.2}
           progressColor="bg-emerald-600"
-          badge="Honors"
-          badgeType="emerald"
         />
       </div>
 
       {/* 4. Subject Attendance Breakdown Table */}
-      <div className="card-stitch overflow-hidden bg-white">
-        <div className="p-4 border-b border-[#e2e8f0] flex items-center justify-between">
+      <div className="card-stitch overflow-hidden bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs">
+        <div className="p-4 border-b border-[var(--border)] flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[#0f172a] text-[18px]">fact_check</span>
-            <h2 className="text-sm font-bold text-[#0b1c30]">Subject-Wise Attendance Breakdown</h2>
+            <span className="material-symbols-outlined text-[var(--primary)] text-[18px]">fact_check</span>
+            <h2 className="text-sm font-bold text-[var(--main-text)]">Subject-Wise Attendance Breakdown</h2>
           </div>
-          <span className="badge-mono text-[10px]">MIN REQUIREMENT: 75%</span>
+          <span className="badge-mono text-[10px]">Min requirement: 75%</span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-[#f1f5f9] border-b border-[#cbd5e1] text-[11px] font-bold text-[#475569] uppercase tracking-wider">
+              <tr className="bg-[#EDE9FE] border-b border-[var(--border)] text-xs font-semibold text-[var(--main-text)]">
                 <th className="py-2.5 px-3">Course Code</th>
                 <th className="py-2.5 px-3">Course Title</th>
                 <th className="py-2.5 px-3">Lectures Attended</th>
@@ -174,18 +168,18 @@ export const StudentDashboard = () => {
                 <th className="py-2.5 px-3 text-right">Standing</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e2e8f0] text-xs">
+            <tbody className="divide-y divide-[var(--border)] text-xs">
               {(data?.subjectAttendance || []).map((subject) => {
                 const isSubjectLow = subject.percent < 75;
                 return (
-                  <tr key={subject.code} className="hover:bg-[#f8fafc] transition-colors">
+                  <tr key={subject.code} className="hover:bg-[#F5F3FF] transition-colors">
                     <td className="py-2.5 px-3">
                       <span className="badge-mono">{subject.code}</span>
                     </td>
-                    <td className="py-2.5 px-3 font-semibold text-[#0b1c30]">{subject.title}</td>
+                    <td className="py-2.5 px-3 font-semibold text-[var(--main-text)]">{subject.title}</td>
                     <td className="py-2.5 px-3 text-emerald-700 font-bold">{subject.present}</td>
-                    <td className="py-2.5 px-3 text-[#075985] font-semibold">{subject.onDuty}</td>
-                    <td className="py-2.5 px-3 text-[#515f74]">{subject.total}</td>
+                    <td className="py-2.5 px-3 text-[var(--primary)] font-semibold">{subject.onDuty}</td>
+                    <td className="py-2.5 px-3 text-[var(--secondary-text)]">{subject.total}</td>
                     <td className="py-2.5 px-3">
                       <div className="w-28">
                         <div className="flex justify-between text-[11px] mb-1 font-mono font-bold">
@@ -193,9 +187,9 @@ export const StudentDashboard = () => {
                             {subject.percent}%
                           </span>
                         </div>
-                        <div className="w-full bg-[#eff4ff] h-1.5 rounded-full overflow-hidden">
+                        <div className="w-full bg-[#EDE9FE] h-1.5 rounded-full overflow-hidden">
                           <div
-                            className={`h-full rounded-full ${isSubjectLow ? 'bg-[#ba1a1a]' : 'bg-emerald-600'}`}
+                            className={`h-full rounded-full origin-left animate-scale-x ${isSubjectLow ? 'bg-[#ba1a1a]' : 'bg-emerald-600'}`}
                             style={{ width: `${subject.percent}%` }}
                           />
                         </div>

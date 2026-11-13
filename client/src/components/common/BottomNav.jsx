@@ -46,7 +46,7 @@ export const BottomNav = () => {
   return (
     <nav
       aria-label="Mobile Bottom Navigation"
-      className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#e2e8f0] lg:hidden pb-[env(safe-area-inset-bottom,0px)] shadow-[0_-2px_10px_rgba(0,0,0,0.06)] select-none"
+      className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--card)]/95 backdrop-blur-md border-t border-[var(--border)] lg:hidden pb-[env(safe-area-inset-bottom,0px)] shadow-[0_-2px_10px_rgba(124,58,237,0.06)] select-none"
     >
       <div className="flex items-center justify-around h-16 px-1">
         {visibleItems.map((item) => (
@@ -54,10 +54,10 @@ export const BottomNav = () => {
             key={item.path}
             to={item.path}
             className={({ isActive }) =>
-              `flex flex-col items-center justify-center flex-1 h-full min-h-[44px] py-1 transition-all group ${
+              `nav-item flex flex-col items-center justify-center flex-1 h-full min-h-[44px] py-1 transition-all group ${
                 isActive
-                  ? 'text-[#0f172a] font-bold'
-                  : 'text-[#64748b] hover:text-[#0b1c30] font-medium'
+                  ? 'text-[var(--primary)] font-bold'
+                  : 'text-[var(--secondary-text)] hover:text-[var(--main-text)] font-medium'
               }`
             }
           >
@@ -66,17 +66,17 @@ export const BottomNav = () => {
                 <div
                   className={`w-10 h-7 flex items-center justify-center rounded-full transition-all ${
                     isActive
-                      ? 'bg-[#e5eeff] text-[#0f172a] shadow-2xs'
-                      : 'text-[#64748b] group-hover:text-[#0b1c30]'
+                      ? 'bg-[var(--primary)] text-white shadow-xs'
+                      : 'text-[var(--secondary-text)] group-hover:text-[var(--main-text)]'
                   }`}
                 >
-                  <span className="material-symbols-outlined text-[21px] leading-none">
+                  <span className={`material-symbols-outlined text-[21px] leading-none ${isActive ? 'animate-icon-pop' : ''}`}>
                     {item.icon}
                   </span>
                 </div>
                 <span
                   className={`text-[10px] tracking-tight truncate max-w-full leading-tight mt-0.5 ${
-                    isActive ? 'font-bold text-[#0b1c30]' : 'font-medium text-[#64748b]'
+                    isActive ? 'font-bold text-[var(--primary)]' : 'font-medium text-[var(--secondary-text)]'
                   }`}
                 >
                   {item.label}

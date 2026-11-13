@@ -46,33 +46,33 @@ export const FacultyDashboard = () => {
   return (
     <div className="space-y-5">
       {/* 1. Academic Governance Context Strip */}
-      <div className="flex flex-wrap items-center justify-between gap-2 bg-white px-4 py-2 rounded border border-[#e2e8f0]">
-        <div className="flex items-center gap-1.5 text-xs text-[#515f74]">
-          <span className="material-symbols-outlined text-[17px] text-[#515f74]">co_present</span>
-          <span className="font-bold uppercase tracking-wider text-[11px] text-[#0b1c30]">Instructional Cadre</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="font-semibold uppercase tracking-wider text-[11px]">Department of Computer Science</span>
-          <span className="text-[#94a3b8]">/</span>
+      <div className="flex flex-wrap items-center justify-between gap-2 bg-[var(--card)] px-4 py-2.5 rounded-2xl border border-[var(--border)] shadow-xs">
+        <div className="flex items-center gap-1.5 text-xs text-[var(--secondary-text)]">
+          <span className="material-symbols-outlined text-[17px] text-[var(--primary)]">co_present</span>
+          <span className="font-semibold text-xs text-[var(--main-text)]">Instructional cadre</span>
+          <span className="text-[var(--border)]">/</span>
+          <span className="font-medium text-xs text-[var(--secondary-text)]">Department of Computer Science</span>
+          <span className="text-[var(--border)]">/</span>
           <span className="badge-mono text-[10px] font-bold">AY 2025–2026</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="badge-mono text-[10px]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block mr-1"></span>
-            ROSTER-CAP: SYNCED
+            Roster: Synced
           </span>
-          <span className="badge-mono text-[10px]">DEPT: CSE</span>
+          <span className="badge-mono text-[10px]">Dept: CSE</span>
         </div>
       </div>
 
       {/* 2. Header & Action Horizon */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-5 rounded border border-[#e2e8f0]">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-[var(--card)] p-5 rounded-2xl border border-[var(--border)] shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-bold text-[#515f74] uppercase tracking-wider">Faculty Portal</span>
-            <span className="badge-emerald">TENURE TRACK</span>
+            <span className="text-xs font-semibold text-[var(--secondary-text)]">Faculty portal</span>
+            <span className="badge-purple">Tenure track</span>
           </div>
-          <h1 className="text-xl font-bold text-[#0b1c30] tracking-tight">Instructional Governance & Workload</h1>
-          <p className="text-xs text-[#515f74] mt-0.5">
+          <h1 className="text-xl font-bold text-[var(--main-text)] tracking-tight">Instructional Governance & Workload</h1>
+          <p className="text-xs text-[var(--secondary-text)] mt-0.5">
             Active course assignments, real-time lecture roll call, and student attendance compliance records.
           </p>
         </div>
@@ -96,28 +96,31 @@ export const FacultyDashboard = () => {
       {/* 3. Workload Health KPIs Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <StatCard
+          index={0}
           title="Assigned Courses"
           value={data?.assignedCoursesCount || 2}
           icon="menu_book"
           subtext="Fall Semester 2025"
           trend="8 Credits Total"
           progress={66.7}
-          progressColor="bg-[#0f172a]"
+          progressColor="bg-[var(--primary)]"
           badge="Active Cadre"
-          badgeType="emerald"
+          badgeType="purple"
         />
         <StatCard
+          index={1}
           title="Enrolled Students"
           value={data?.totalEnrolledStudents || 120}
           icon="groups"
           subtext="Under primary instruction"
           trend="2 Sections"
           progress={100}
-          progressColor="bg-[#515f74]"
+          progressColor="bg-[#6D28D9]"
           badge="Capacity 100%"
-          badgeType="sky"
+          badgeType="purple"
         />
         <StatCard
+          index={2}
           title="Lectures Conducted"
           value={data?.sessionsConducted || 28}
           icon="calendar_month"
@@ -129,6 +132,7 @@ export const FacultyDashboard = () => {
           badgeType="emerald"
         />
         <StatCard
+          index={3}
           title="Average Attendance"
           value={data?.averageAttendance || '91.2%'}
           icon="verified"
@@ -142,11 +146,11 @@ export const FacultyDashboard = () => {
       </div>
 
       {/* 4. Active Teaching Sections (Stitch Spec) */}
-      <div className="card-stitch p-5 bg-white">
-        <div className="flex items-center justify-between pb-3 border-b border-[#e2e8f0] mb-4">
+      <div className="card-stitch p-5 bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs">
+        <div className="flex items-center justify-between pb-3 border-b border-[var(--border)] mb-4">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[#0f172a] text-[18px]">co_present</span>
-            <h2 className="text-sm font-bold text-[#0b1c30]">Active Course Assignments & Sections</h2>
+            <span className="material-symbols-outlined text-[var(--primary)] text-[18px]">co_present</span>
+            <h2 className="text-sm font-bold text-[var(--main-text)]">Active Course Assignments & Sections</h2>
           </div>
           <span className="badge-mono text-[10px]">AY25-FA SEMESTER</span>
         </div>
@@ -155,36 +159,36 @@ export const FacultyDashboard = () => {
           {(data?.activeCourses || []).map((course) => (
             <div
               key={course.id}
-              className="p-4 rounded border border-[#e2e8f0] bg-[#f8f9ff] flex flex-col justify-between gap-3 hover:border-[#cbd5e1] transition-all"
+              className="p-4 rounded-xl border border-[var(--border)] bg-[#F5F3FF] flex flex-col justify-between gap-3 hover:border-[#C4B5FD] transition-all"
             >
               <div>
                 <div className="flex items-center justify-between">
                   <span className="badge-mono text-xs font-semibold">
                     {course.code} • Sec {course.section}
                   </span>
-                  <span className="badge-sky text-[10px]">{course.credits || 4} CREDITS</span>
+                  <span className="badge-purple text-[10px]">{course.credits || 4} CREDITS</span>
                 </div>
-                <h3 className="text-sm font-bold text-[#0b1c30] mt-2">{course.title}</h3>
-                <div className="flex items-center gap-3 text-xs text-[#515f74] mt-1.5 flex-wrap">
+                <h3 className="text-sm font-bold text-[var(--main-text)] mt-2">{course.title}</h3>
+                <div className="flex items-center gap-3 text-xs text-[var(--secondary-text)] mt-1.5 flex-wrap">
                   <span className="inline-flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[15px]">room</span>
+                    <span className="material-symbols-outlined text-[15px] text-[var(--primary)]">room</span>
                     {course.hall || 'Turing Hall 104'}
                   </span>
                   <span>•</span>
                   <span className="inline-flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[15px]">schedule</span>
+                    <span className="material-symbols-outlined text-[15px] text-[var(--primary)]">schedule</span>
                     {course.nextClass}
                   </span>
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#e2e8f0] flex items-center justify-between">
-                <span className="text-xs font-medium text-[#515f74]">
-                  Enrolled: <strong className="text-[#0b1c30]">{course.students} students</strong>
+              <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between">
+                <span className="text-xs font-medium text-[var(--secondary-text)]">
+                  Enrolled: <strong className="text-[var(--main-text)]">{course.students} students</strong>
                 </span>
                 <Link
                   to="/attendance"
-                  className="btn-stitch-primary text-[11px] py-1 px-2.5"
+                  className="btn-stitch-primary text-[11px] py-1.5 px-3 rounded-lg"
                 >
                   <span className="material-symbols-outlined text-[15px]">fact_check</span>
                   <span>Start Roll Call</span>

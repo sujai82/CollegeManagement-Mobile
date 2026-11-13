@@ -52,33 +52,33 @@ export const AdminDashboard = () => {
   return (
     <div className="space-y-5">
       {/* 1. Academic Governance Context Strip */}
-      <div className="flex flex-wrap items-center justify-between gap-2 bg-white px-4 py-2 rounded border border-[#e2e8f0]">
-        <div className="flex items-center gap-1.5 text-xs text-[#515f74]">
-          <span className="material-symbols-outlined text-[17px] text-[#515f74]">dashboard</span>
-          <span className="font-bold uppercase tracking-wider text-[11px] text-[#0b1c30]">Office of Academic Affairs</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="font-semibold uppercase tracking-wider text-[11px]">Executive Governance</span>
-          <span className="text-[#94a3b8]">/</span>
+      <div className="flex flex-wrap items-center justify-between gap-2 bg-[var(--card)] px-4 py-2.5 rounded-2xl border border-[var(--border)] shadow-xs">
+        <div className="flex items-center gap-1.5 text-xs text-[var(--secondary-text)]">
+          <span className="material-symbols-outlined text-[17px] text-[var(--primary)]">dashboard</span>
+          <span className="font-semibold text-xs text-[var(--main-text)]">Office of academic affairs</span>
+          <span className="text-[var(--border)]">/</span>
+          <span className="font-medium text-xs text-[var(--secondary-text)]">Executive governance</span>
+          <span className="text-[var(--border)]">/</span>
           <span className="badge-mono text-[10px] font-bold">AY 2025–2026</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="badge-mono text-[10px]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block mr-1"></span>
-            SYS-HEALTH: 99.98%
+            System health: 99.98%
           </span>
-          <span className="badge-mono text-[10px]">REG-LIVE</span>
+          <span className="badge-mono text-[10px]">Live</span>
         </div>
       </div>
 
       {/* 2. Header & Action Horizon */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-5 rounded border border-[#e2e8f0]">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-[var(--card)] p-5 rounded-2xl border border-[var(--border)] shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-bold text-[#515f74] uppercase tracking-wider">Institutional Command</span>
-            <span className="badge-amber">ADMINISTRATIVE MASTER</span>
+            <span className="text-xs font-semibold text-[var(--secondary-text)]">Institutional command</span>
+            <span className="badge-purple">Administrative master</span>
           </div>
-          <h1 className="text-xl font-bold text-[#0b1c30] tracking-tight">Academic Affairs & Registrar Hub</h1>
-          <p className="text-xs text-[#515f74] mt-0.5">
+          <h1 className="text-xl font-bold text-[var(--main-text)] tracking-tight">Academic Affairs & Registrar Hub</h1>
+          <p className="text-xs text-[var(--secondary-text)] mt-0.5">
             Real-time enrollment health, faculty appointments, lecture audit telemetry, and departmental oversight.
           </p>
         </div>
@@ -102,28 +102,31 @@ export const AdminDashboard = () => {
       {/* 3. Stitch KPI Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <StatCard
+          index={0}
           title="Total Enrolled Students"
           value={data?.totalStudents || 1420}
           icon="school"
           subtext="Undergraduate & Graduate"
           trend="+4.2% YoY"
           progress={94.6}
-          progressColor="bg-[#0f172a]"
+          progressColor="bg-[var(--primary)]"
           badge="Dean's Eligible"
           badgeType="emerald"
         />
         <StatCard
+          index={1}
           title="Instructional Faculty"
           value={data?.totalFaculty || 86}
           icon="groups"
           subtext="Across 4 active faculties"
           trend="68.3% Tenured"
           progress={84.2}
-          progressColor="bg-[#515f74]"
+          progressColor="bg-[#6D28D9]"
           badge="Staffed"
-          badgeType="sky"
+          badgeType="purple"
         />
         <StatCard
+          index={2}
           title="Academic Departments"
           value={data?.totalDepartments || 4}
           icon="domain"
@@ -135,6 +138,7 @@ export const AdminDashboard = () => {
           badgeType="emerald"
         />
         <StatCard
+          index={3}
           title="Attendance Compliance"
           value={data?.overallAttendanceAvg || '88.4%'}
           icon="check_circle"
@@ -150,13 +154,13 @@ export const AdminDashboard = () => {
       {/* 4. Modular Split Data Panes (Stitch Spec) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Recent Institutional Circulars */}
-        <div className="card-stitch p-5 bg-white">
-          <div className="flex items-center justify-between pb-3 border-b border-[#e2e8f0] mb-4">
+        <div className="card-stitch p-5 bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs">
+          <div className="flex items-center justify-between pb-3 border-b border-[var(--border)] mb-4">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#0f172a] text-[18px]">campaign</span>
-              <h2 className="text-sm font-bold text-[#0b1c30]">Institutional Circulars & Notices</h2>
+              <span className="material-symbols-outlined text-[var(--primary)] text-[18px]">campaign</span>
+              <h2 className="text-sm font-bold text-[var(--main-text)]">Institutional Circulars & Notices</h2>
             </div>
-            <Link to="/notices" className="text-xs text-[#515f74] hover:text-[#0b1c30] font-semibold">
+            <Link to="/notices" className="text-xs text-[var(--primary)] hover:text-[#6D28D9] font-bold">
               View All &rarr;
             </Link>
           </div>
@@ -165,13 +169,13 @@ export const AdminDashboard = () => {
             {(data?.recentNotices || []).map((notice) => (
               <div
                 key={notice.id}
-                className="p-3 rounded border border-[#e2e8f0] bg-[#f8f9ff] flex items-center justify-between gap-3"
+                className="p-3 rounded-xl border border-[var(--border)] bg-[#F5F3FF] flex items-center justify-between gap-3"
               >
                 <div>
-                  <h3 className="text-xs font-semibold text-[#0b1c30]">{notice.title}</h3>
-                  <p className="text-[11px] text-[#515f74] mt-0.5">Published {notice.date} • College Wide</p>
+                  <h3 className="text-xs font-semibold text-[var(--main-text)]">{notice.title}</h3>
+                  <p className="text-[11px] text-[var(--secondary-text)] mt-0.5">Published {notice.date} • College Wide</p>
                 </div>
-                <span className={notice.priority === 'HIGH' ? 'badge-rose' : 'badge-sky'}>
+                <span className={notice.priority === 'HIGH' ? 'badge-rose' : 'badge-purple'}>
                   {notice.priority}
                 </span>
               </div>
@@ -180,11 +184,11 @@ export const AdminDashboard = () => {
         </div>
 
         {/* Real-time System Audit Ledger */}
-        <div className="card-stitch p-5 bg-white">
-          <div className="flex items-center justify-between pb-3 border-b border-[#e2e8f0] mb-4">
+        <div className="card-stitch p-5 bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-xs">
+          <div className="flex items-center justify-between pb-3 border-b border-[var(--border)] mb-4">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#0f172a] text-[18px]">history</span>
-              <h2 className="text-sm font-bold text-[#0b1c30]">Immutable Audit Trail</h2>
+              <span className="material-symbols-outlined text-[var(--primary)] text-[18px]">history</span>
+              <h2 className="text-sm font-bold text-[var(--main-text)]">Immutable Audit Trail</h2>
             </div>
             <span className="badge-mono text-[10px]">LIVE REPLICATION</span>
           </div>
@@ -193,13 +197,13 @@ export const AdminDashboard = () => {
             {(data?.recentAuditLogs || []).map((log) => (
               <div
                 key={log.id}
-                className="p-2.5 rounded border border-[#e2e8f0] flex items-center justify-between text-xs"
+                className="p-2.5 rounded-xl border border-[var(--border)] flex items-center justify-between text-xs bg-[#F5F3FF]"
               >
                 <div className="flex items-center gap-2.5">
                   <span className="badge-mono text-[10px]">{log.action}</span>
-                  <span className="font-medium text-[#0b1c30]">{log.entity}</span>
+                  <span className="font-semibold text-[var(--main-text)]">{log.entity}</span>
                 </div>
-                <span className="text-[11px] text-[#515f74] font-mono">{log.time}</span>
+                <span className="text-[11px] text-[var(--secondary-text)] font-mono">{log.time}</span>
               </div>
             ))}
           </div>

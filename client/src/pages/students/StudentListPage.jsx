@@ -179,33 +179,12 @@ export const StudentListPage = () => {
 
   return (
     <div className="space-y-5">
-      {/* 1. Academic Breadcrumb & Context Strip (Stitch Spec) */}
-      <div className="flex flex-wrap items-center justify-between gap-2 bg-white px-4 py-2 rounded border border-[#e2e8f0]">
-        <div className="flex items-center gap-1.5 text-xs">
-          <span className="font-semibold text-[#515f74] uppercase tracking-wider text-[11px]">Office of Academic Affairs</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="font-semibold text-[#515f74] uppercase tracking-wider text-[11px]">Registrar Operations</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="font-bold text-[#0b1c30] uppercase tracking-wider text-[11px]">Active Enrollment Registry</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="badge-mono text-[10px]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block mr-1"></span>
-            DB SYNC: LIVE
-          </span>
-          <span className="badge-mono text-[10px]">TERM: AY25-26-FA</span>
-        </div>
-      </div>
-
-      {/* 2. Page Header & Primary Actions */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-5 rounded border border-[#e2e8f0]">
+      {/* Page Header */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-[var(--card)] p-5 rounded-2xl border border-[var(--border)] shadow-xs">
         <div>
-          <div className="flex items-center gap-2.5">
-            <h1 className="text-xl font-bold text-[#0b1c30] tracking-tight">Student Directory</h1>
-            <span className="badge-mono text-xs font-semibold">{filteredStudents.length} ENROLLED</span>
-          </div>
-          <p className="text-xs text-[#515f74] mt-0.5">
-            Active undergraduate and graduate student roster with separate individual access passwords and credentials.
+          <h1 className="text-xl font-bold text-[var(--main-text)] tracking-tight">Students</h1>
+          <p className="text-xs text-[var(--secondary-text)] mt-0.5">
+            {filteredStudents.length} students
           </p>
         </div>
 
@@ -221,7 +200,7 @@ export const StudentListPage = () => {
               a.download = 'students_directory.csv';
               a.click();
             }}
-            className="btn-stitch-secondary"
+            className="btn-stitch-secondary py-2 px-3 text-xs font-semibold"
           >
             <span className="material-symbols-outlined text-[16px]">download</span>
             <span>Export CSV</span>
@@ -259,8 +238,8 @@ export const StudentListPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <div className="card-stitch p-4 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-[#515f74] uppercase tracking-wider">Total Enrolled</span>
-            <span className="material-symbols-outlined text-[#515f74] text-[18px]">groups</span>
+            <span className="text-xs font-semibold text-[var(--secondary-text)]">Total enrolled</span>
+            <span className="material-symbols-outlined text-[var(--secondary-text)] text-[18px]">groups</span>
           </div>
           <div className="flex items-baseline gap-2 mt-2">
             <span className="text-2xl font-bold text-[#0b1c30]">{students.length}</span>
@@ -277,7 +256,7 @@ export const StudentListPage = () => {
 
         <div className="card-stitch p-4 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-[#515f74] uppercase tracking-wider">Dean's Honor List</span>
+            <span className="text-xs font-semibold text-[var(--secondary-text)]">Dean's honor list</span>
             <span className="material-symbols-outlined text-emerald-700 text-[18px]">verified</span>
           </div>
           <div className="flex items-baseline gap-2 mt-2">
@@ -295,7 +274,7 @@ export const StudentListPage = () => {
 
         <div className="card-stitch p-4 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-[#515f74] uppercase tracking-wider">Credential Security</span>
+            <span className="text-xs font-semibold text-[var(--secondary-text)]">Credential security</span>
             <span className="material-symbols-outlined text-sky-700 text-[18px]">lock</span>
           </div>
           <div className="flex items-baseline gap-2 mt-2">
@@ -304,7 +283,7 @@ export const StudentListPage = () => {
           </div>
           <div className="mt-2 text-[11px] text-[#515f74] flex justify-between">
             <span>Encryption</span>
-            <span className="font-mono font-semibold text-[#075985]">BCRYPT 10</span>
+            <span className="font-mono font-semibold text-[#075985]">Bcrypt 10</span>
           </div>
           <div className="w-full bg-[#eff4ff] h-1.5 rounded-full mt-1.5 overflow-hidden">
             <div className="bg-[#075985] h-full" style={{ width: '100%' }}></div>
@@ -313,7 +292,7 @@ export const StudentListPage = () => {
 
         <div className="card-stitch p-4 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-[#515f74] uppercase tracking-wider">Registrar Clearance</span>
+            <span className="text-xs font-semibold text-[var(--secondary-text)]">Registrar clearance</span>
             <span className="material-symbols-outlined text-emerald-700 text-[18px]">how_to_reg</span>
           </div>
           <div className="flex items-baseline gap-2 mt-2">

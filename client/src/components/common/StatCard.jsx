@@ -1,4 +1,5 @@
 import React from 'react';
+import useInView from '../../hooks/useInView';
 
 export const StatCard = ({
   title,
@@ -7,12 +8,17 @@ export const StatCard = ({
   subtext,
   trend,
   progress,
-  progressColor = 'bg-[#0f172a]',
+  progressColor = 'bg-[var(--primary)]',
   badge,
   badgeType = 'sky',
+  index = 0,
 }) => {
+  const [cardRef, isInView] = useInView({ threshold: 0.1 });
+
   const getBadgeClass = (type) => {
     switch (type) {
+      case 'purple':
+        return 'badge-purple';
       case 'emerald':
         return 'badge-emerald';
       case 'rose':
@@ -26,20 +32,26 @@ export const StatCard = ({
   };
 
   return (
-    <div className="card-stitch p-4 sm:p-5 flex flex-col justify-between bg-white relative overflow-hidden">
+    <div
+      ref={cardRef}
+      style={{ '--i': index }}
+      className={`card-stitch p-4 sm:p-5 flex flex-col justify-between bg-[var(--card)] border border-[var(--border)] rounded-2xl relative overflow-hidden shadow-xs ${
+        isInView ? 'animate-fade-up' : 'opacity-0'
+      }`}
+    >
       <div className="flex items-center justify-between">
-        <span className="text-[11px] font-bold text-[#515f74] uppercase tracking-wider">
+        <span className="text-xs font-semibold text-[var(--secondary-text)]">
           {title}
         </span>
         {icon && (
-          <span className="material-symbols-outlined text-[#515f74] text-[20px]">
+          <span className="material-symbols-outlined text-[var(--primary)] text-[22px]">
             {icon}
           </span>
         )}
       </div>
 
       <div className="flex items-baseline gap-2 mt-2.5">
-        <span className="text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+        <span className="text-2xl sm:text-3xl font-bold text-[var(--main-text)] tracking-tight">
           {value ?? '—'}
         </span>
         {badge && (
@@ -50,10 +62,10 @@ export const StatCard = ({
       </div>
 
       {(subtext || trend) && (
-        <div className="mt-2.5 pt-2 border-t border-[#e2e8f0]/60 flex items-center justify-between text-xs text-[#515f74]">
-          <span>{subtext}</span>
+        <div className="mt-2.5 pt-2 border-t border-[var(--border)] flex items-center justify-between text-xs text-[var(--secondary-text)]">
+          {subtext ? <span>{subtext}</span> : <span />}
           {trend && (
-            <span className="font-mono text-xs font-semibold text-[#0b1c30]">
+            <span className="text-xs font-medium text-[var(--secondary-text)]">
               {trend}
             </span>
           )}
@@ -61,9 +73,11 @@ export const StatCard = ({
       )}
 
       {progress !== undefined && (
-        <div className="w-full bg-[#eff4ff] h-1.5 rounded-full mt-2.5 overflow-hidden">
+        <div className="w-full bg-[#EDE9FE] h-1.5 rounded-full mt-2.5 overflow-hidden">
           <div
-            className={`h-full rounded-full transition-all duration-500 ${progressColor}`}
+            className={`h-full rounded-full origin-left transition-all duration-500 ${progressColor} ${
+              isInView ? 'animate-scale-x' : 'scale-x-0'
+            }`}
             style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
           />
         </div>

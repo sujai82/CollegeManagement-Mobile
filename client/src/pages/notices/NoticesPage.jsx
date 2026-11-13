@@ -87,35 +87,12 @@ export const NoticesPage = () => {
 
   return (
     <div className="space-y-5">
-      {/* 1. Academic Governance Context Strip */}
-      <div className="flex flex-wrap items-center justify-between gap-2 bg-white px-4 py-2 rounded border border-[#e2e8f0]">
-        <div className="flex items-center gap-1.5 text-xs text-[#515f74]">
-          <span className="material-symbols-outlined text-[17px] text-[#515f74]">campaign</span>
-          <span className="font-bold uppercase tracking-wider text-[11px] text-[#0b1c30]">Institutional Communications</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="font-semibold uppercase tracking-wider text-[11px]">Official Circulars & Gazettes</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="badge-mono text-[10px] font-bold">AY 2025–2026</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="badge-mono text-[10px]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block mr-1"></span>
-            DISPATCH: ACTIVE
-          </span>
-          <span className="badge-mono text-[10px]">ALL-STUDENTS</span>
-        </div>
-      </div>
-
-      {/* 2. Header & Action Horizon */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-5 rounded border border-[#e2e8f0]">
+      {/* Header & Action */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-[var(--card)] p-5 rounded-2xl border border-[var(--border)] shadow-xs">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-bold text-[#515f74] uppercase tracking-wider">Campus Dispatch</span>
-            <span className="badge-mono text-[10px]">{notices.length} CIRCULARS ACTIVE</span>
-          </div>
-          <h1 className="text-xl font-bold text-[#0b1c30] tracking-tight">Institutional Notices & Gazettes</h1>
-          <p className="text-xs text-[#515f74] mt-0.5">
-            Official collegiate directives, examination schedules, departmental alerts, and committee circulars.
+          <h1 className="text-xl font-bold text-[var(--main-text)] tracking-tight">Notices</h1>
+          <p className="text-xs text-[var(--secondary-text)] mt-0.5">
+            {notices.length} notices
           </p>
         </div>
 
@@ -123,10 +100,10 @@ export const NoticesPage = () => {
           <button
             type="button"
             onClick={() => setShowModal(true)}
-            className="btn-stitch-primary"
+            className="btn-stitch-primary py-2 px-3 text-xs font-semibold"
           >
             <span className="material-symbols-outlined text-[16px]">post_add</span>
-            <span>Publish Circular</span>
+            <span>New notice</span>
           </button>
         )}
       </div>

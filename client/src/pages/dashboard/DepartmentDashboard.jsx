@@ -44,34 +44,34 @@ export const DepartmentDashboard = () => {
   return (
     <div className="space-y-5">
       {/* 1. Academic Governance Context Strip */}
-      <div className="flex flex-wrap items-center justify-between gap-2 bg-white px-4 py-2 rounded border border-[#e2e8f0]">
-        <div className="flex items-center gap-1.5 text-xs text-[#515f74]">
-          <span className="material-symbols-outlined text-[17px] text-[#515f74]">domain</span>
-          <span className="font-bold uppercase tracking-wider text-[11px] text-[#0b1c30]">Departmental Registry</span>
-          <span className="text-[#94a3b8]">/</span>
-          <span className="font-semibold uppercase tracking-wider text-[11px]">{data?.departmentName}</span>
-          <span className="text-[#94a3b8]">/</span>
+      <div className="flex flex-wrap items-center justify-between gap-2 bg-[var(--card)] px-4 py-2.5 rounded-2xl border border-[var(--border)] shadow-xs">
+        <div className="flex items-center gap-1.5 text-xs text-[var(--secondary-text)]">
+          <span className="material-symbols-outlined text-[17px] text-[var(--primary)]">domain</span>
+          <span className="font-semibold text-xs text-[var(--main-text)]">Departmental registry</span>
+          <span className="text-[var(--border)]">/</span>
+          <span className="font-medium text-xs text-[var(--secondary-text)]">{data?.departmentName}</span>
+          <span className="text-[var(--border)]">/</span>
           <span className="badge-mono text-[10px] font-bold">AY 2025–2026</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="badge-mono text-[10px]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 inline-block mr-1"></span>
-            HOD REGISTERED
+            HOD registered
           </span>
-          <span className="badge-mono text-[10px]">STATUS: ACTIVE</span>
+          <span className="badge-mono text-[10px]">Status: Active</span>
         </div>
       </div>
 
       {/* 2. Header & Action Horizon */}
-      <div className="card-stitch p-5 bg-white border border-[#e2e8f0] flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="card-stitch p-5 bg-[var(--card)] border border-[var(--border)] rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="badge-mono text-xs font-bold text-[#0b1c30]">CSE DIVISION</span>
-            <span className="badge-emerald">HOD COMMAND</span>
+            <span className="badge-mono text-xs font-bold">CSE division</span>
+            <span className="badge-purple">HOD command</span>
           </div>
-          <h1 className="text-xl font-bold text-[#0b1c30] tracking-tight">{data?.departmentName}</h1>
-          <p className="text-xs text-[#515f74] mt-0.5">
-            Head of Department: <strong className="text-[#0b1c30]">{data?.hodName}</strong> • Turing Academic Block
+          <h1 className="text-xl font-bold text-[var(--main-text)] tracking-tight">{data?.departmentName}</h1>
+          <p className="text-xs text-[var(--secondary-text)] mt-0.5">
+            Head of Department: <strong className="text-[var(--main-text)]">{data?.hodName}</strong> • Turing Academic Block
           </p>
         </div>
 
@@ -90,39 +90,43 @@ export const DepartmentDashboard = () => {
       {/* 3. KPI Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
+          index={0}
           title="Department Students"
           value={data?.studentCount || 380}
           icon="school"
           subtext="Undergraduate & Postgrad"
           trend="8 Cohorts"
           progress={95}
-          progressColor="bg-[#0f172a]"
+          progressColor="bg-[var(--primary)]"
           badge="Enrolled"
-          badgeType="sky"
+          badgeType="purple"
         />
         <StatCard
+          index={1}
           title="Instructional Faculty"
           value={data?.facultyCount || 18}
           icon="groups"
           subtext="Professors & Lecturers"
           trend="100% Retained"
           progress={88}
-          progressColor="bg-[#515f74]"
+          progressColor="bg-[#6D28D9]"
           badge="Active"
           badgeType="emerald"
         />
         <StatCard
+          index={2}
           title="Course Offerings"
           value={data?.courseCount || 14}
           icon="menu_book"
           subtext="Current Curriculum"
           trend="52 Total Credits"
           progress={100}
-          progressColor="bg-[#0f172a]"
+          progressColor="bg-[var(--primary)]"
           badge="Accredited"
           badgeType="emerald"
         />
         <StatCard
+          index={3}
           title="Attendance Average"
           value={data?.avgAttendance || '89.6%'}
           icon="verified"
